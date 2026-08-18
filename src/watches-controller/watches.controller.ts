@@ -1,9 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
+import { Watch } from '@prisma/client';
+import { WatchService } from './watch.service';
 
 @Controller('watches')
 export class WatchesController {
+  constructor(private readonly watchService: WatchService) {}
+
   @Get()
-  findAll(): string {
-    return 'This action returns all watches';
+  findAll(): Promise<Watch[]> {
+    return this.watchService.watches({});
   }
 }
