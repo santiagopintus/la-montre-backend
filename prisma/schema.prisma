@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Brand {
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  watches Watch[]
+}
+
+model Watch {
+  id      Int     @id @default(autoincrement())
+  model   String  @unique
+  brand   Brand   @relation(fields: [brandId], references: [id])
+  price   Float
+  digital Boolean @default(false)
+  smart   Boolean @default(false)
+  imgName String
+  brandId Int
+}
