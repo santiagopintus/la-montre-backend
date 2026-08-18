@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common';
+import { BrandsController } from './brands.controller';
+import { BrandService } from './brand.service';
+
+@Module({
+  controllers: [BrandsController],
+  providers: [BrandService],
+})
+export class BrandsModule {}
